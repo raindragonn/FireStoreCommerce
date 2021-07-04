@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757634194260",
+    "project_id": "firestorecommerce",
+    "storage_bucket": "firestorecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757634194260:android:a07599f8b85d2560dcc6c1",
+        "android_client_info": {
+          "package_name": "com.raindragonn.firestorecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757634194260-m3n8tt26nn5ptjejun7vfvt0kavupl9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiSlkOfUVGAtn6VT0_YbLW49xfZy3U9qY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757634194260-m3n8tt26nn5ptjejun7vfvt0kavupl9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
