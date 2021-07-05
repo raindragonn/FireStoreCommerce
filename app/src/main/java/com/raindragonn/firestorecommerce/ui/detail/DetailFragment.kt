@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.raindragonn.firestorecommerce.R
@@ -15,6 +16,8 @@ import com.raindragonn.firestorecommerce.ui.review.ReviewFragment
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     override fun getViewBinding(layoutInflater: LayoutInflater): FragmentDetailBinding =
         FragmentDetailBinding.inflate(layoutInflater)
+
+    private val arguments: DetailFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,13 +37,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         }
     }
 
-    class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    inner class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         override fun getItemCount(): Int = 2
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> ProductIntroduceFragment()
-                1 -> ReviewFragment()
+                0 -> ProductIntroduceFragment.newInstance(arguments.product)
+                1 -> ReviewFragment.newInstance(arguments.product)
                 else -> throw RuntimeException("ViewPagerAdapter Error - createFragment")
             }
         }
