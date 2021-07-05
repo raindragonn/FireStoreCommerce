@@ -6,12 +6,14 @@ buildscript {
     // https://github.com/hongbeomi/AndroidTemplate/blob/master/build.gradle
 
     ext.versions = [
-            "retrofit"           : "2.9.0",
-            "logging_interceptor": "4.9.1",
-            "navigation"         : "2.3.5",
-            "coroutine"          : "1.4.3",
-            "koin"               : "2.2.3",
-            "glide"              : "4.12.0"
+            "retrofit"             : "2.9.0",
+            "logging_interceptor"  : "4.9.1",
+            "navigation"           : "2.3.5",
+            "coroutine"            : "1.4.3",
+            "koin"                 : "2.2.3",
+            "glide"                : "4.12.0",
+            "swipe_refresh"        : "1.1.0",
+            "glide_transformations": "4.3.0"
 
     ]
     repositories {
