@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">FireStoreCommerce</string>
+    <string name="app_name">Book Commerce</string>
 
     <string name="title_introduce">앱 소개</string>
     <string name="title_product_list">상품 목록</string>
     <string name="title_review">리뷰 목록</string>
     <string name="title_product_introduce">상품 소개</string>
+    <string name="error_description">데이터를 불러오지 못했습니다.\n아래로 당겨 새로고침 해주세요!</string>
+    <string name="review_noData">리뷰가 없습니다.\n아이콘을눌러 새로고침 해주세요!</string>
+    <string name="review_write">리뷰 작성하기</string>
+    <string name="product_preparing">상품 준비중</string>
+    <string name="review_guide">리뷰를 남겨주세요</string>
 </resources>
