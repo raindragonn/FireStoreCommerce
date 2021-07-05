@@ -2,7 +2,7 @@ package com.raindragonn.firestorecommerce.data.sample.response
 
 
 import com.google.gson.annotations.SerializedName
-import com.raindragonn.firestorecommerce.data.Product
+import com.raindragonn.firestorecommerce.data.model.Product
 
 
 data class SampleItem(
@@ -11,7 +11,7 @@ data class SampleItem(
     @SerializedName("author")
     val author: String? = null,
     @SerializedName("price")
-    val price: String? = null,
+    val price: Int? = null,
     @SerializedName("image")
     val image: String? = null,
     @SerializedName("publisher")
@@ -31,6 +31,8 @@ fun SampleItem.toProduct(): Product {
         publisher = this.publisher,
         pubdate = this.pubdate,
         description = this.description,
-        isSelling = true
+        isSelling = true,
+        totalReviewer = 0,
+        totalStar = 0f
     )
 }
