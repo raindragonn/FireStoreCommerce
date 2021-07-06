@@ -8,6 +8,7 @@ import com.raindragonn.firestorecommerce.databinding.FragmentProductListBinding
 import com.raindragonn.firestorecommerce.ui.base.BaseFragment
 import com.raindragonn.firestorecommerce.ui.main.MainFragmentDirections
 import com.raindragonn.firestorecommerce.util.isNetworkConnected
+import com.raindragonn.firestorecommerce.util.showToast
 import com.raindragonn.firestorecommerce.util.toGone
 import com.raindragonn.firestorecommerce.util.toVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -86,6 +87,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
             if (requireContext().isNetworkConnected) {
                 viewModel.getProductData()
             } else {
+                requireContext().showToast("인터넷 연결을 확인해주세요.")
                 errorVisible()
             }
         } catch (e: Exception) {

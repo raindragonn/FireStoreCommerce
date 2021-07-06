@@ -20,7 +20,7 @@ val appModule = module {
 
     //ViewModel
     viewModel<ProductListViewModel> { ProductListViewModel(get()) }
-    viewModel<AppIntroduceViewModel> { AppIntroduceViewModel() }
+    viewModel<AppIntroduceViewModel> { AppIntroduceViewModel(get()) }
 
     viewModel<ProductIntroduceViewModel> { ProductIntroduceViewModel() }
     viewModel<ReviewViewModel> { (product: Product) -> ReviewViewModel(get(), get(), product) }
@@ -29,6 +29,8 @@ val appModule = module {
     single<FirebaseFirestore> { Firebase.firestore }
 
     // API and Repository
+    single<AppIntroduceApi> { AppIntroduceFireStoreApi(get()) }
+    single<AppIntroduceRepository> { AppIntroduceRepositoryImpl(get()) }
     single<ProductApi> { ProductFireStoreApi(get()) }
     single<ProductRepository> { ProductRepositoryImpl(get()) }
     single<ReviewApi> { ReviewFireStoreApi(get()) }

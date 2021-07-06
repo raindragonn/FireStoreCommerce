@@ -12,6 +12,8 @@ import com.raindragonn.firestorecommerce.databinding.DialogReviewBinding
 import com.raindragonn.firestorecommerce.databinding.FragmentReviewBinding
 import com.raindragonn.firestorecommerce.ui.base.BaseFragment
 import com.raindragonn.firestorecommerce.ui.product_introduce.ProductIntroduceFragment
+import com.raindragonn.firestorecommerce.util.isNetworkConnected
+import com.raindragonn.firestorecommerce.util.showToast
 import com.raindragonn.firestorecommerce.util.toGone
 import com.raindragonn.firestorecommerce.util.toVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,11 +63,11 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>() {
                                 == (rv.adapter as ReviewListAdapter).itemCount - 1) &&
                         (rv.adapter as ReviewListAdapter).itemCount >= 5
                     ) {
-                        viewModel.getMoreList()
+                        loadData()
                     }
                 }
             })
-            tvError.setOnClickListener { viewModel.getMoreList() }
+            tvError.setOnClickListener { loadData() }
             btnReview.setOnClickListener { reviewWrite() }
         }
     }
@@ -95,7 +97,16 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>() {
     }
 
     private fun loadData() {
-        viewModel.getMoreList()
+        try {
+            if (requireContext().isNetworkConnected) {
+                viewModel.getMoreList()
+            } else {
+                requireContext().showToast("인터넷 연결을 확인해주세요.")
+                errorVisible()
+            }
+        } catch (e: Exception) {
+            errorVisible()
+        }
     }
 
     private fun observeData() {

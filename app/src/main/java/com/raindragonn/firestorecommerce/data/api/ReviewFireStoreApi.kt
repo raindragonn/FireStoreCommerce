@@ -49,11 +49,11 @@ class ReviewFireStoreApi(
     }
 
     override suspend fun addReview(review: Review): Review {
-        val newReviewReference = fireStore.collection("Reviews").document()
-        val productReference = fireStore.collection("Products").document(review.productId!!)
+        val newReviewsRef = fireStore.collection("Reviews").document()
+        val productsRef = fireStore.collection("Products").document(review.productId!!)
 
         fireStore.runTransaction { transaction ->
-            val product = transaction.get(productReference).toObject<Product>()!!
+            val product = transaction.get(productsRef).toObject<Product>()!!
 
             val oldTotalReviewer = product.totalReviewer ?: 0
             val oldTotalStar = product.totalStar ?: 0f
@@ -62,29 +62,29 @@ class ReviewFireStoreApi(
             val newTotalStar = oldTotalStar + (review.star ?: 0f)
 
             transaction.set(
-                productReference,
+                productsRef,
                 product.copy(
                     totalReviewer = newTotalReviewer,
                     totalStar = newTotalStar
                 )
             )
             transaction.set(
-                newReviewReference,
+                newReviewsRef,
                 review,
                 SetOptions.merge()
             )
         }.await()
 
-        return newReviewReference.get().await().toObject<Review>()!!
+        return newReviewsRef.get().await().toObject<Review>()!!
     }
 
     override suspend fun removeReview(review: Review) {
-        val reviewReference = fireStore.collection("Reviews").document(review.id!!)
-        val productReference = fireStore.collection("Products").document(review.productId!!)
+        val reviewsRef = fireStore.collection("Reviews").document(review.id!!)
+        val productsRef = fireStore.collection("Products").document(review.productId!!)
 
         fireStore.runTransaction { transaction ->
             val product = transaction
-                .get(productReference)
+                .get(productsRef)
                 .toObject<Product>()!!
 
             val oldTotalReviewer = product.totalReviewer ?: 0
@@ -94,14 +94,14 @@ class ReviewFireStoreApi(
             val newTotalStar = oldTotalStar - (review.star ?: 0f)
 
             transaction.set(
-                productReference,
+                productsRef,
                 product.copy(
                     totalStar = newTotalStar,
                     totalReviewer = newTotalReviewer
                 )
             )
 
-            transaction.delete(reviewReference)
+            transaction.delete(reviewsRef)
         }.await()
     }
 }
